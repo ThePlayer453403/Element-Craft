@@ -1,5 +1,6 @@
 package com.github.elementcraft;
 
+import com.github.elementcraft.component.ModComponents;
 import com.github.elementcraft.item.ModItems;
 import org.slf4j.Logger;
 
@@ -40,6 +41,7 @@ public class ElementCraft {
 
         NeoForge.EVENT_BUS.register(this);
         ModItems.register(modEventBus);
+        ModComponents.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

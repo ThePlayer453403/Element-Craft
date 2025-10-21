@@ -9,6 +9,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ElementCraft.MOD_ID);
-    public static final DeferredItem<Item> ORIGINAL_RESIN = ITEMS.register("original_resin", () -> new OriginalResin(new Item.Properties()));
+    public static final DeferredItem<Item> ORIGINAL_RESIN = ITEMS.register("original_resin", () -> new OriginalResin(new Item.Properties().durability(200)));
     public static void register(IEventBus modEventBus){ITEMS.register(modEventBus);}
 }
