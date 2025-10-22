@@ -3,6 +3,9 @@
 
   "text.element.next_replenished": "Replenished in",
   "text.element.fully_replenished": "Fully replenished",
+  "text.element.multi_replenished": "Only one original resin can replenish",
 
-  "curios.identifier.original_resin": "Original Resin"
+  "curios.identifier.original_resin": "Original Resin",
+
+  "element.configuration.originalResinReplenishSpeed": "Original Resin replenish speed"
 }
