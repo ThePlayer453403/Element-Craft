@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class OriginalResin extends Item {
-    public static HashMap<UUID, Long> PlayerRegenerated = new HashMap<>();
-    int regeneratedTick = 600;
+    public static HashMap<UUID, Long> PlayerReplenished = new HashMap<>();
+    int replenishedTime = 8;
 
     public OriginalResin(Properties properties) {
         super(properties);
@@ -22,32 +22,44 @@ public class OriginalResin extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        Component component = Component.nullToEmpty(stack.get(ModComponents.ORIGINAL_RESIN_REGENERATES).toString());
-        tooltipComponents.add(component);
+        tooltipComponents.add(
+                Component.translatable("text.element.next_replenished")
+                        .append(" ")
+                        .append(String.valueOf(stack.get(ModComponents.ORIGINAL_RESIN_REPLENISHED)))
+        );
+        tooltipComponents.add(
+                Component.translatable("text.element.fully_replenished")
+                        .append(" ")
+                        .append(String.valueOf(stack.get(ModComponents.ORIGINAL_RESIN_REPLENISHED)))
+        );
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (!level.isClientSide){
+        long tick = level.getGameTime();
+
+        if (!level.isClientSide() && tick % 20 == 0) {
             UUID uuid = entity.getUUID();
-            long tick = level.getGameTime();
 
-            if(!stack.has(ModComponents.ORIGINAL_RESIN_REGENERATES)){
+            if (!stack.has(ModComponents.ORIGINAL_RESIN_REPLENISHED)) {
+                stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, replenishedTime);
                 stack.setDamageValue(200);
-                stack.set(ModComponents.ORIGINAL_RESIN_REGENERATES, 0);
             }
+            if (!PlayerReplenished.containsKey(uuid) || PlayerReplenished.get(uuid) != tick) {
+                int replenished = stack.get(ModComponents.ORIGINAL_RESIN_REPLENISHED);
 
-            if(!PlayerRegenerated.containsKey(uuid) || PlayerRegenerated.get(uuid) < tick){
-                int regenerates = stack.get(ModComponents.ORIGINAL_RESIN_REGENERATES);
-
-                if(regenerates >= regeneratedTick){
+                if (replenished <= 0) {
                     stack.setDamageValue(stack.getDamageValue() - 1);
-                    stack.set(ModComponents.ORIGINAL_RESIN_REGENERATES, 0);
-                    PlayerRegenerated.put(uuid, tick);
-                }else{
-                    stack.set(ModComponents.ORIGINAL_RESIN_REGENERATES, regenerates + 1);
+                    if (stack.getDamageValue() != 0) {
+                        stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, replenishedTime);
+                    }
+                } else {
+                    stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, replenished - 1);
                 }
+                PlayerReplenished.put(uuid, tick);
+            } else {
+                stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, -1);
             }
         }
         super.inventoryTick(stack, level, entity, slotId, isSelected);

@@ -1,3 +1,8 @@
 {
-  "item.element.original_resin": "原粹树脂"
+  "item.element.original_resin": "原粹树脂",
+
+  "text.element.next_replenished": "下次恢复",
+  "text.element.fully_replenished": "全部恢复",
+
+  "curios.identifier.original_resin": "原粹树脂"
 }

@@ -1,3 +1,8 @@
 {
-  "item.element.original_resin": "Original Resin"
+  "item.element.original_resin": "Original Resin",
+
+  "text.element.next_replenished": "Replenished in",
+  "text.element.fully_replenished": "Fully replenished",
+
+  "curios.identifier.original_resin": "Original Resin"
 }

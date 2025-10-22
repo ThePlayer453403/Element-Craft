@@ -2,7 +2,6 @@ package com.github.elementcraft.component;
 
 import com.github.elementcraft.ElementCraft;
 import com.mojang.serialization.Codec;
-import com.sun.jna.platform.win32.WinDef;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
@@ -13,7 +12,7 @@ import java.util.function.UnaryOperator;
 
 public class ModComponents {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPE = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, ElementCraft.MOD_ID);
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ORIGINAL_RESIN_REGENERATES = register("original_resin_regenerates", builder -> builder.persistent(Codec.INT));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ORIGINAL_RESIN_REPLENISHED = register("original_resin_replenished", builder -> builder.persistent(Codec.INT));
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         return DATA_COMPONENT_TYPE.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());
     }

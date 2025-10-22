@@ -186,3 +186,15 @@ idea {
         downloadJavadoc = true
     }
 }
+
+repositories {
+    maven {
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
+    }
+}
+
+dependencies {
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
+}
