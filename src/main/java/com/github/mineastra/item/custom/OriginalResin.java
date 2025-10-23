@@ -76,10 +76,4 @@ public class OriginalResin extends Item {
 
         super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
-
-    @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        stack.setDamageValue(2);
-        return super.onItemUseFirst(stack, context);
-    }
 }
