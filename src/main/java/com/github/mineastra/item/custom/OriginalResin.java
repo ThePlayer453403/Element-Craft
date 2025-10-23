@@ -3,10 +3,12 @@ package com.github.mineastra.item.custom;
 import com.github.mineastra.Config;
 import com.github.mineastra.component.ModComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
@@ -14,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class OriginalResin extends Item {
-    public static HashMap<UUID, Long> PlayerReplenished = new HashMap<>();
+    HashMap<UUID, Long> PlayerReplenished = new HashMap<>();
 
     public OriginalResin(Properties properties) {
         super(properties);
@@ -22,28 +24,20 @@ public class OriginalResin extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        if (stack.has(ModComponents.ORIGINAL_RESIN_REPLENISHED)) {
+        if (stack.getDamageValue() <= 0) {
+            tooltipComponents.add(Component.translatable("original.mineastra.fully_replenished"));
+        } else if (stack.has(ModComponents.ORIGINAL_RESIN_REPLENISHED)) {
             int replenished = stack.get(ModComponents.ORIGINAL_RESIN_REPLENISHED);
-
-            tooltipComponents.add(
-                    Component.nullToEmpty(200 - stack.getDamageValue() + " / 200")
-            );
-
             if (replenished < 0) {
-                tooltipComponents.add(
-                        Component.translatable("text.mineastra.multi_replenished")
-                );
+                tooltipComponents.add(Component.translatable("original.mineastra.stop_replenished"));
             } else {
-                tooltipComponents.add(
-                        Component.translatable("text.mineastra.next_replenished")
-                                .append(" ")
-                                .append(String.valueOf(replenished))
-                );
-                tooltipComponents.add(
-                        Component.translatable("text.mineastra.fully_replenished")
-                                .append(" ")
-                                .append(String.valueOf((stack.getDamageValue() - 1) * Config.REPLENISH_SPEED.getAsInt() + replenished))
-                );
+                tooltipComponents.add(Component.nullToEmpty(200 - stack.getDamageValue() + " / 200"));
+                tooltipComponents.add(Component.translatable("original.mineastra.next_replenished_time")
+                        .append(" ")
+                        .append(String.valueOf(replenished)));
+                tooltipComponents.add(Component.translatable("original.mineastra.fully_replenished_time")
+                        .append(" ")
+                        .append(String.valueOf((stack.getDamageValue() - 1) * Config.REPLENISH_SPEED.getAsInt() + replenished)));
             }
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
@@ -55,19 +49,22 @@ public class OriginalResin extends Item {
 
         if (!level.isClientSide() && tick % 20 == 0) {
             UUID uuid = entity.getUUID();
+            int speed = Config.REPLENISH_SPEED.getAsInt();
 
-            if (!stack.has(ModComponents.ORIGINAL_RESIN_REPLENISHED)) {
-                stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, Config.REPLENISH_SPEED.getAsInt());
-                stack.setDamageValue(200);
-            }
-            if (!PlayerReplenished.containsKey(uuid) || PlayerReplenished.get(uuid) != tick) {
+            if (!PlayerReplenished.containsKey(uuid) || PlayerReplenished.get(uuid) != tick){
+                if (!stack.has(ModComponents.ORIGINAL_RESIN_REPLENISHED)) {
+                    stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, speed);
+                    stack.setDamageValue(200);
+                }
+
                 int replenished = stack.get(ModComponents.ORIGINAL_RESIN_REPLENISHED);
-
-                if (replenished <= 1) {
+                if (stack.getDamageValue() <= 0) {
+                    stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, 0);
+                } else if (replenished > speed) {
+                    stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, speed);
+                } else if (replenished <= 0) {
+                    stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, speed);
                     stack.setDamageValue(stack.getDamageValue() - 1);
-                    if (stack.getDamageValue() != 0) {
-                        stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, Config.REPLENISH_SPEED.getAsInt());
-                    }
                 } else {
                     stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, replenished - 1);
                 }
@@ -75,16 +72,14 @@ public class OriginalResin extends Item {
             } else {
                 stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, -1);
             }
-            if (stack.get(ModComponents.ORIGINAL_RESIN_REPLENISHED) > Config.REPLENISH_SPEED.getAsInt()) {
-                stack.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, Config.REPLENISH_SPEED.getAsInt());
-            }
         }
+
         super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
 
-//    @Override
-//    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-//        stack.setDamageValue(stack.getDamageValue() + 1);
-//        return super.onItemUseFirst(stack, context);
-//    }
+    @Override
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        stack.setDamageValue(2);
+        return super.onItemUseFirst(stack, context);
+    }
 }
