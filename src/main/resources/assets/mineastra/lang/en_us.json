@@ -1,10 +1,14 @@
 {
   "item.mineastra.original_resin": "Original Resin",
+  "item.mineastra.fragile_resin": "Fragile Resin",
+  "item.mineastra.condensed_resin": "Condensed Resin",
 
   "original.mineastra.next_replenished_time": "Replenished in",
   "original.mineastra.fully_replenished_time": "Fully replenished",
   "original.mineastra.stop_replenished": "Only one original resin can replenish",
   "original.mineastra.fully_replenished": "Original resin is fully replenished",
+
+  "creativetab.mineastra.tab": "Mineastra Wonderland",
 
   "curios.identifier.original_resin": "Original Resin",
 

@@ -2,6 +2,7 @@ package com.github.mineastra.item;
 
 import com.github.mineastra.MineastraWonderland;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
@@ -15,8 +16,11 @@ public class ModCreativeModeTabs {
             CREATIVE_MODE_TAB.register("element_craft_tab",
                     () -> CreativeModeTab.builder()
                             .icon(() -> new ItemStack(ModItems.ORIGINAL_RESIN.get()))
+                            .title(Component.translatable("creativetab.mineastra.tab"))
                             .displayItems(((itemDisplayParameters, output) -> {
                                 output.accept(ModItems.ORIGINAL_RESIN);
+                                output.accept(ModItems.FRAGILE_RESIN);
+                                output.accept(ModItems.CONDENSED_RESIN);
                             }))
                             .build());
     public static void register(IEventBus modEventBus) {
