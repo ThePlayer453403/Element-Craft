@@ -1,7 +1,7 @@
-package com.github.elementcraft.item.custom;
+package com.github.mineastra.item.custom;
 
-import com.github.elementcraft.Config;
-import com.github.elementcraft.component.ModComponents;
+import com.github.mineastra.Config;
+import com.github.mineastra.component.ModComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
@@ -31,16 +31,16 @@ public class OriginalResin extends Item {
 
             if (replenished < 0) {
                 tooltipComponents.add(
-                        Component.translatable("text.element.multi_replenished")
+                        Component.translatable("text.mineastra.multi_replenished")
                 );
             } else {
                 tooltipComponents.add(
-                        Component.translatable("text.element.next_replenished")
+                        Component.translatable("text.mineastra.next_replenished")
                                 .append(" ")
                                 .append(String.valueOf(replenished))
                 );
                 tooltipComponents.add(
-                        Component.translatable("text.element.fully_replenished")
+                        Component.translatable("text.mineastra.fully_replenished")
                                 .append(" ")
                                 .append(String.valueOf((stack.getDamageValue() - 1) * Config.REPLENISH_SPEED.getAsInt() + replenished))
                 );

@@ -1,4 +1,4 @@
-package com.github.elementcraft;
+package com.github.mineastra;
 
 import java.util.List;
 

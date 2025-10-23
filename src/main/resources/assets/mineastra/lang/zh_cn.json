@@ -1,0 +1,11 @@
+{
+  "item.mineastra.original_resin": "原粹树脂",
+
+  "text.mineastra.next_replenished": "下次恢复",
+  "text.mineastra.fully_replenished": "全部恢复",
+  "text.mineastra.multi_replenished": "只有一个原粹树脂可以回复",
+
+  "curios.identifier.original_resin": "原粹树脂",
+
+  "mineastra.configuration.originalResinReplenishSpeed": "原粹树脂恢复速度"
+}

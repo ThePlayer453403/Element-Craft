@@ -1,0 +1,11 @@
+{
+  "item.mineastra.original_resin": "Original Resin",
+
+  "text.mineastra.next_replenished": "Replenished in",
+  "text.mineastra.fully_replenished": "Fully replenished",
+  "text.mineastra.multi_replenished": "Only one original resin can replenish",
+
+  "curios.identifier.original_resin": "Original Resin",
+
+  "mineastra.configuration.originalResinReplenishSpeed": "Original Resin replenish speed"
+}
