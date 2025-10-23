@@ -23,6 +23,7 @@ public class FragileResin extends Item {
                         item.has(ModComponents.ORIGINAL_RESIN_REPLENISHED) && item.get(ModComponents.ORIGINAL_RESIN_REPLENISHED) <= 1940
                 ) {
                     item.set(ModComponents.ORIGINAL_RESIN_REPLENISHED, item.get(ModComponents.ORIGINAL_RESIN_REPLENISHED) + 60);
+                    item.shrink(1);
                     return InteractionResult.SUCCESS;
                 }
             }
