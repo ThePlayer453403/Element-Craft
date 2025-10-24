@@ -1,8 +1,8 @@
-package com.github.mineastra;
+package com.github.blockastra;
 
-import com.github.mineastra.component.ModComponents;
-import com.github.mineastra.item.ModCreativeModeTabs;
-import com.github.mineastra.item.ModItems;
+import com.github.blockastra.component.ModComponents;
+import com.github.blockastra.item.ModCreativeModeTabs;
+import com.github.blockastra.item.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -12,11 +12,11 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 
-@Mod(MineastraWonderland.MOD_ID)
-public class MineastraWonderland {
-    public static final String MOD_ID = "mineastra";
+@Mod(BlockastraWonderland.MOD_ID)
+public class BlockastraWonderland {
+    public static final String MOD_ID = "blockastra";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public MineastraWonderland(IEventBus modEventBus, ModContainer modContainer) {
+    public BlockastraWonderland(IEventBus modEventBus, ModContainer modContainer) {
         ModItems.register(modEventBus);
         ModComponents.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mineastra:item/original_resin"
+    "layer0": "blockastra:item/fragile_resin"
   }
 }

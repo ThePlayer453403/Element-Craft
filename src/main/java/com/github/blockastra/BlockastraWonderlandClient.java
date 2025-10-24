@@ -1,4 +1,4 @@
-package com.github.mineastra;
+package com.github.blockastra;
 
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
@@ -11,11 +11,11 @@ import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
-@Mod(value = MineastraWonderland.MOD_ID, dist = Dist.CLIENT)
+@Mod(value = BlockastraWonderland.MOD_ID, dist = Dist.CLIENT)
 // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-@EventBusSubscriber(modid = MineastraWonderland.MOD_ID, value = Dist.CLIENT)
-public class MineastraWonderlandClient {
-    public MineastraWonderlandClient(ModContainer container) {
+@EventBusSubscriber(modid = BlockastraWonderland.MOD_ID, value = Dist.CLIENT)
+public class BlockastraWonderlandClient {
+    public BlockastraWonderlandClient(ModContainer container) {
         // Allows NeoForge to create a config screen for this mod's configs.
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
         // Do not forget to add translations for your config options to the en_us.json file.
@@ -25,7 +25,7 @@ public class MineastraWonderlandClient {
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
         // Some client setup code
-        MineastraWonderland.LOGGER.info("HELLO FROM CLIENT SETUP");
-        MineastraWonderland.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        BlockastraWonderland.LOGGER.info("HELLO FROM CLIENT SETUP");
+        BlockastraWonderland.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
 }

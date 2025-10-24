@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mineastra:item/condensed_resin"
+    "layer0": "blockastra:item/condensed_resin"
   }
 }

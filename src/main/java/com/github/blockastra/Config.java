@@ -1,4 +1,4 @@
-package com.github.mineastra;
+package com.github.blockastra;
 
 import java.util.List;
 
